@@ -1,9 +1,7 @@
 import { Dimensions } from "react-native";
-import DeviceInfo from "react-native-device-info";
 
 const { width: fullWidth, height: fullHeight } = Dimensions.get("window");
 
-const isTablet = DeviceInfo.isTablet();
 // this is from dimensions of the iphone 15 pro max
 const HEIGHT_DESIGN_REF = 956;
 const WIDTH_DESIGN_REF = 440;
@@ -22,9 +20,6 @@ type ScaleType = "width" | "height" | "font";
  */
 
 const scale = (size: number, type: ScaleType = "width"): number => {
-  if (isTablet) {
-    return size;
-  }
   switch (type) {
     case "height":
       return size * heightRef;
@@ -55,7 +50,6 @@ export {
   fullHeight,
   fullWidth,
   heightRef,
-  isTablet,
   scale,
   screenIsSmall,
   widthRef,
