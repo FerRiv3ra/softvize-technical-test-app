@@ -1,23 +1,23 @@
-import React from "react";
-import { Text, View } from "react-native";
+import React from 'react';
+import { Text, View } from 'react-native';
 
-import { Image } from "expo-image";
+import { Image } from 'expo-image';
 
-import { CustomButton } from "@/src/components/atoms/CustomButton";
-import { CustomInput } from "@/src/components/atoms/CustomInput";
-import { useAuthScreens } from "@/src/hooks/useAuthScreens";
-import { AppLogo } from "@/src/utils/constants/Images";
+import { CustomButton } from '@/src/components/atoms/CustomButton';
+import { CustomInput } from '@/src/components/atoms/CustomInput';
+import { useAuthScreens } from '@/src/hooks/useAuthScreens';
+import { AppLogo } from '@/src/utils/constants/Images';
 
 export const RegisterScreen = () => {
   const {
     colors,
-    styles,
-    handleNavigate,
     email,
+    handleNavigate,
+    handleSubmit,
     name,
-    password,
     onChange,
-    reset,
+    password,
+    styles,
   } = useAuthScreens(true);
 
   return (
@@ -28,33 +28,32 @@ export const RegisterScreen = () => {
       <CustomInput
         label="Email"
         value={email}
-        onChangeText={(value) => onChange(value, "email")}
+        onChangeText={value => onChange(value, 'email')}
         placeholder="Enter your email"
       />
       <CustomInput
         label="Name"
         value={name}
-        onChangeText={(value) => onChange(value, "name")}
+        onChangeText={value => onChange(value, 'name')}
         placeholder="Enter your name"
       />
       <CustomInput
         label="Password"
         value={password}
-        onChangeText={(value) => onChange(value, "password")}
+        onChangeText={value => onChange(value, 'password')}
         placeholder="Enter your password"
         secureTextEntry
         password
       />
 
-      <CustomButton onPress={reset}>Log In</CustomButton>
+      <CustomButton onPress={handleSubmit}>Log In</CustomButton>
 
       <View style={styles.signUpContainer}>
         <Text>Already have an account? </Text>
         <CustomButton
           onPress={handleNavigate}
           textStyle={{ color: colors.tint }}
-          unstyled
-        >
+          unstyled>
           Log In
         </CustomButton>
       </View>

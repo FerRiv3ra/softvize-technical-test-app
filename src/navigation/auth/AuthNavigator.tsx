@@ -1,25 +1,27 @@
-import React from "react";
+import React from 'react';
 
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { AppScreens, AuthScreenProps } from "@/src/screens/AppScreens";
-import { LoginScreen } from "@/src/screens/auth/LoginScreen";
-import { OnboardingScreen } from "@/src/screens/auth/OnboardingScreen";
-import { RegisterScreen } from "@/src/screens/auth/RegisterScreen";
+import { useThemeColor } from '@/src/hooks/useThemeColor';
+import { AppScreens, AuthScreenProps } from '@/src/screens/AppScreens';
+import { LoginScreen } from '@/src/screens/auth/LoginScreen';
+import { OnboardingScreen } from '@/src/screens/auth/OnboardingScreen';
+import { RegisterScreen } from '@/src/screens/auth/RegisterScreen';
 
 const Stack = createNativeStackNavigator<AuthScreenProps>();
 
 export default function AuthNavigator() {
+  const colors = useThemeColor();
+
   return (
     <Stack.Navigator
       initialRouteName={AppScreens.ONBOARDING_SCREEN}
       screenOptions={{
         headerShown: false,
         contentStyle: {
-          //   backgroundColor: theme.background.get(),
+          backgroundColor: colors.background,
         },
-      }}
-    >
+      }}>
       <Stack.Screen
         name={AppScreens.ONBOARDING_SCREEN}
         component={OnboardingScreen}
@@ -27,14 +29,14 @@ export default function AuthNavigator() {
       <Stack.Screen
         name={AppScreens.LOGIN_SCREEN}
         options={{
-          animationTypeForReplace: "push",
+          animationTypeForReplace: 'push',
         }}
         component={LoginScreen}
       />
       <Stack.Screen
         name={AppScreens.REGISTER_SCREEN}
         options={{
-          animationTypeForReplace: "push",
+          animationTypeForReplace: 'push',
         }}
         component={RegisterScreen}
       />

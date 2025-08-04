@@ -1,16 +1,23 @@
-import React from "react";
-import { Text, View } from "react-native";
+import React from 'react';
+import { Text, View } from 'react-native';
 
-import { Image } from "expo-image";
+import { Image } from 'expo-image';
 
-import { CustomButton } from "@/src/components/atoms/CustomButton";
-import { CustomInput } from "@/src/components/atoms/CustomInput";
-import { useAuthScreens } from "@/src/hooks/useAuthScreens";
-import { AppLogo } from "@/src/utils/constants/Images";
+import { CustomButton } from '@/src/components/atoms/CustomButton';
+import { CustomInput } from '@/src/components/atoms/CustomInput';
+import { useAuthScreens } from '@/src/hooks/useAuthScreens';
+import { AppLogo } from '@/src/utils/constants/Images';
 
 export const LoginScreen = () => {
-  const { colors, styles, handleNavigate, email, password, onChange, reset } =
-    useAuthScreens();
+  const {
+    colors,
+    email,
+    handleNavigate,
+    handleSubmit,
+    onChange,
+    password,
+    styles,
+  } = useAuthScreens();
 
   return (
     <View style={styles.container}>
@@ -20,27 +27,26 @@ export const LoginScreen = () => {
       <CustomInput
         label="Email"
         value={email}
-        onChangeText={(value) => onChange(value, "email")}
+        onChangeText={value => onChange(value, 'email')}
         placeholder="Enter your email"
       />
       <CustomInput
         label="Password"
         value={password}
-        onChangeText={(value) => onChange(value, "password")}
+        onChangeText={value => onChange(value, 'password')}
         placeholder="Enter your password"
         secureTextEntry
         password
       />
 
-      <CustomButton onPress={reset}>Log In</CustomButton>
+      <CustomButton onPress={handleSubmit}>Log In</CustomButton>
 
       <View style={styles.signUpContainer}>
         <Text>Don't have an account? </Text>
         <CustomButton
           onPress={handleNavigate}
           textStyle={{ color: colors.tint }}
-          unstyled
-        >
+          unstyled>
           Sign Up
         </CustomButton>
       </View>

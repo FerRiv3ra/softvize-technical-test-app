@@ -1,13 +1,11 @@
-import { combineReducers } from "@reduxjs/toolkit";
+import { combineReducers } from '@reduxjs/toolkit';
 
-import appConfigReducer from "./appConfig/appConfig";
-// import authReducer from './auth/authSlice';
-// import propertiesReducer from './properties/propertiesSlice';
-// import tenantReducer from './tenant/tenantSlice';
+import appConfigReducer from './appConfig/appConfig';
+import authReducer from './auth/authSlice';
 
 const rootReducer = combineReducers({
   appConfig: appConfigReducer,
-  //   auth: authReducer,
+  auth: authReducer,
   // connections:
 });
 
