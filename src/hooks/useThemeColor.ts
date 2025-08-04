@@ -1,21 +1,11 @@
-/**
- * Learn more about light and dark modes:
- * https://docs.expo.dev/guides/color-schemes/
- */
+import { useSelector } from "react-redux";
+import { appConfigSelectors } from "../store/appConfig/appConfig";
+import { Colors } from "../utils/constants/Colors";
 
-import { useColorScheme } from "@/src/hooks/useColorScheme";
-import { Colors } from "@/src/utils/constants/Colors";
+export function useThemeColor() {
+  const isDarkMode = useSelector(appConfigSelectors.isDarkMode);
 
-export function useThemeColor(
-  props: { light?: string; dark?: string },
-  colorName: keyof typeof Colors.light & keyof typeof Colors.dark
-) {
-  const theme = useColorScheme() ?? "light";
-  const colorFromProps = props[theme];
+  const colors = isDarkMode ? Colors.dark : Colors.light;
 
-  if (colorFromProps) {
-    return colorFromProps;
-  } else {
-    return Colors[theme][colorName];
-  }
+  return colors;
 }
