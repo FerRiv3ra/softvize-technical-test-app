@@ -1,48 +1,21 @@
-import React, { useMemo } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { Text, View } from "react-native";
 
 import { Image } from "expo-image";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { CustomButton } from "@/src/components/atoms/CustomButton";
 import { CustomInput } from "@/src/components/atoms/CustomInput";
-import { useForm } from "@/src/hooks/useForm";
+import { useAuthScreens } from "@/src/hooks/useAuthScreens";
 import { AppLogo } from "@/src/utils/constants/Images";
-import { scale } from "@/src/utils/helpers/scale";
 
 export const LoginScreen = () => {
-  const { top } = useSafeAreaInsets();
-  const { email, password, onChange, reset } = useForm({
-    email: "",
-    password: "",
-  });
-
-  const memoStyles = useMemo(() => {
-    return StyleSheet.create({
-      container: {
-        flex: 1,
-        paddingTop: top,
-        paddingHorizontal: scale(16),
-        gap: scale(16),
-      },
-      logo: {
-        width: scale(250),
-        height: scale(250),
-        alignSelf: "center",
-      },
-      welcomeText: {
-        textAlign: "center",
-        fontSize: scale(16, "font"),
-      },
-    });
-  }, [top]);
+  const { colors, styles, handleNavigate, email, password, onChange, reset } =
+    useAuthScreens();
 
   return (
-    <View style={memoStyles.container}>
-      <Image source={AppLogo} style={memoStyles.logo} />
-      <Text style={memoStyles.welcomeText}>
-        Welcome to the Login Screen! Please log in to continue.
-      </Text>
+    <View style={styles.container}>
+      <Image source={AppLogo} style={styles.logo} />
+      <Text style={styles.welcomeText}>Please log in to continue.</Text>
 
       <CustomInput
         label="Email"
@@ -56,9 +29,21 @@ export const LoginScreen = () => {
         onChangeText={(value) => onChange(value, "password")}
         placeholder="Enter your password"
         secureTextEntry
+        password
       />
 
       <CustomButton onPress={reset}>Log In</CustomButton>
+
+      <View style={styles.signUpContainer}>
+        <Text>Don't have an account? </Text>
+        <CustomButton
+          onPress={handleNavigate}
+          textStyle={{ color: colors.tint }}
+          unstyled
+        >
+          Sign Up
+        </CustomButton>
+      </View>
     </View>
   );
 };

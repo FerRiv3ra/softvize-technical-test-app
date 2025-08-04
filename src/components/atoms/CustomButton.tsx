@@ -22,6 +22,7 @@ interface CustomButtonProps extends TouchableOpacityProps {
   children?: React.ReactNode | string;
   variant?: "primary" | "outline" | "filled";
   textStyle?: StyleProp<TextStyle>;
+  unstyled?: boolean;
 }
 
 export const CustomButton = ({
@@ -34,6 +35,12 @@ export const CustomButton = ({
   const colors = useThemeColor();
 
   const memoStyles = useMemo(() => {
+    if (props.unstyled) {
+      return StyleSheet.create({
+        button: {},
+        text: {},
+      });
+    }
     return StyleSheet.create({
       button: {
         padding: 10,
@@ -53,16 +60,26 @@ export const CustomButton = ({
           color: colors.text,
         }),
       },
+      text: {
+        color: colors.text,
+        fontSize: 16,
+        fontWeight: "bold",
+        ...(variant === "outline" && {
+          color: colors.tint,
+        }),
+        ...(variant === "filled" && {
+          color: colors.background,
+        }),
+        ...(variant === "primary" && {
+          color: colors.background,
+        }),
+      },
     });
   }, [colors, variant]);
 
   const renderChildren = useMemo(() => {
     if (typeof children === "string") {
-      return (
-        <Text style={[{ color: memoStyles.button.color }, textStyle]}>
-          {children}
-        </Text>
-      );
+      return <Text style={[memoStyles.text, textStyle]}>{children}</Text>;
     }
 
     return children;
