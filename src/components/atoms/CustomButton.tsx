@@ -1,5 +1,5 @@
-import { useThemeColor } from "@/src/hooks/useThemeColor";
-import React, { useMemo } from "react";
+import { useThemeColor } from '@/src/hooks/useThemeColor';
+import React, { useMemo } from 'react';
 import {
   StyleProp,
   StyleSheet,
@@ -7,7 +7,7 @@ import {
   TextStyle,
   TouchableOpacity,
   TouchableOpacityProps,
-} from "react-native";
+} from 'react-native';
 
 /**
  * CustomButton is a reusable button component with different styles.
@@ -20,7 +20,7 @@ import {
  */
 interface CustomButtonProps extends TouchableOpacityProps {
   children?: React.ReactNode | string;
-  variant?: "primary" | "outline" | "filled";
+  variant?: 'primary' | 'outline' | 'filled';
   textStyle?: StyleProp<TextStyle>;
   unstyled?: boolean;
 }
@@ -28,7 +28,7 @@ interface CustomButtonProps extends TouchableOpacityProps {
 export const CustomButton = ({
   children,
   style,
-  variant = "primary",
+  variant = 'primary',
   textStyle,
   ...props
 }: CustomButtonProps) => {
@@ -38,39 +38,41 @@ export const CustomButton = ({
     if (props.unstyled) {
       return StyleSheet.create({
         button: {},
-        text: {},
+        text: {
+          fontFamily: 'Mulish-Bold',
+        },
       });
     }
     return StyleSheet.create({
       button: {
         padding: 10,
         borderRadius: 5,
-        alignItems: "center",
-        ...(variant === "primary" && {
+        alignItems: 'center',
+        ...(variant === 'primary' && {
           backgroundColor: colors.tint,
           color: colors.background,
         }),
-        ...(variant === "outline" && {
+        ...(variant === 'outline' && {
           borderWidth: 1,
           borderColor: colors.tint,
-          backgroundColor: "transparent",
+          backgroundColor: 'transparent',
           color: colors.tint,
         }),
-        ...(variant === "filled" && {
+        ...(variant === 'filled' && {
           color: colors.text,
         }),
       },
       text: {
         color: colors.text,
         fontSize: 16,
-        fontWeight: "bold",
-        ...(variant === "outline" && {
+        fontFamily: 'Mulish-Bold',
+        ...(variant === 'outline' && {
           color: colors.tint,
         }),
-        ...(variant === "filled" && {
+        ...(variant === 'filled' && {
           color: colors.background,
         }),
-        ...(variant === "primary" && {
+        ...(variant === 'primary' && {
           color: colors.background,
         }),
       },
@@ -78,7 +80,7 @@ export const CustomButton = ({
   }, [colors, variant]);
 
   const renderChildren = useMemo(() => {
-    if (typeof children === "string") {
+    if (typeof children === 'string') {
       return <Text style={[memoStyles.text, textStyle]}>{children}</Text>;
     }
 

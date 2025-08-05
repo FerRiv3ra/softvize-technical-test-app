@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { authSelectors } from '../store/auth/authSlice';
 import MainNavigator from './app/AppNavigator';
-import AuthNavigator from './auth/AuthNavigator';
+import AuthNavigator from './app/AuthNavigator';
 
 export default function AppNavigation() {
   const isAuthenticated = useSelector(authSelectors.selectIsAuthenticated);
