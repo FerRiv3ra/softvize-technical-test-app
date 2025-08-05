@@ -1,50 +1,90 @@
-# Welcome to your Expo app 👋
+# Technical Test - Setup Instructions
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This project is a React Native app built with Expo. Please follow the steps below to get it running on a physical device.
 
-## Get started
+## 🛠️ Setup Instructions
 
-1. Install dependencies
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/FerRiv3ra/softvize-technical-test-app
+   ```
+
+2. **Enter the project folder**
+
+   ```bash
+   cd softvize-technical-test-app
+   ```
+
+3. **Install dependencies**
+   You can use either `npm` or `yarn`. I used `yarn` for this project.
+
+   ```bash
+   yarn install
+   ```
+
+   Or
 
    ```bash
    npm install
    ```
 
-2. Start the app
+4. **Configure environment variables**
+   Rename the `.env.template` file to `.env`
+
+   ```bash
+   mv .env.template .env
+   ```
+
+5. **Ensure the backend server is running**
+   The app connects to a backend server. Make sure it is up and running before starting the app.
+
+6. **Use your local IP address instead of `localhost`**
+   Since this app is tested on **physical devices**, using `localhost` will not work.
+   Replace any instance of `localhost` in the `.env` file with your machine’s local IP address.
+
+   - **macOS:**
+     Open Terminal and run:
+
+     ```bash
+     ipconfig getifaddr en0
+     ```
+
+   - **Windows:**
+     Open Command Prompt and run:
+
+     ```bash
+     ipconfig
+     ```
+
+     Look for the **IPv4 Address** under your active network adapter.
+
+7. **Start the Expo development server**
+
+   ```bash
+   yarn start
+   ```
+
+   Or
 
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+8. **Open the app on a physical device**
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   - Download the **Expo Go** app from the App Store or Google Play.
+   - Scan the QR code shown in the terminal or browser after starting the project.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 📦 Tech Stack & Packages
 
-## Get a fresh project
+- **React Native with Expo** (latest version)
+- **Redux** for state management
+- **Axios** for API requests
+- **Custom components**
+- **Custom hooks**
+- **Custom fonts**
 
-When you're ready, run:
+---
 
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Feel free to contact me if you encounter any issues while setting up the project.
