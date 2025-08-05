@@ -53,7 +53,7 @@ export const useAuthScreens = (register = false) => {
       await login({ email, password });
       reset();
     } catch (error) {}
-  }, [navigation, form]);
+  }, [navigation, register, form]);
 
   const handleRegister = useCallback(async () => {
     if ([email, password, name].some(field => field.trim() === '')) {
@@ -62,12 +62,12 @@ export const useAuthScreens = (register = false) => {
     }
 
     try {
-      await registerUser({ email, password, name });
-      reset();
+      await registerUser({ email, password, name }).unwrap();
+      // reset();
     } catch (error) {
       Alert.alert('Error', 'Registration failed. Please try again.');
     }
-  }, [navigation, form]);
+  }, [navigation, register, form]);
 
   const styles = useMemo(() => {
     return StyleSheet.create({

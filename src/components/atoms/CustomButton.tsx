@@ -88,7 +88,10 @@ export const CustomButton = ({
   }, [children, textStyle]);
 
   return (
-    <TouchableOpacity style={memoStyles.button} activeOpacity={0.7} {...props}>
+    <TouchableOpacity
+      style={[memoStyles.button, style]}
+      activeOpacity={0.7}
+      {...props}>
       {renderChildren}
     </TouchableOpacity>
   );
