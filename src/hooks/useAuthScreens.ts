@@ -5,6 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { AppScreens } from '../screens/AppScreens';
 import { authActions } from '../store/auth/authSlice';
+import { EMAIL_REGEX, PASS_REGEX } from '../utils/constants/regex';
 import { scale } from '../utils/helpers/scale';
 import useActions from './useActions';
 import { useAppNavigation } from './useAppNavigation';
@@ -49,6 +50,15 @@ export const useAuthScreens = (register = false) => {
       return;
     }
 
+    if (!EMAIL_REGEX.test(email)) {
+      Alert.alert('Error', 'Please enter a valid email address.');
+      return;
+    }
+    if (password.length < 8) {
+      Alert.alert('Error', 'Password must be at least 8 characters long.');
+      return;
+    }
+
     try {
       await login({ email, password });
       reset();
@@ -61,11 +71,28 @@ export const useAuthScreens = (register = false) => {
       return;
     }
 
+    if (!EMAIL_REGEX.test(email)) {
+      Alert.alert('Error', 'Please enter a valid email address.');
+      return;
+    }
+
+    if (!PASS_REGEX.test(password)) {
+      Alert.alert(
+        'Error',
+        'Password must be at least 8 characters long and include uppercase letters, lowercase letters, numbers, and special characters.'
+      );
+      return;
+    }
+
     try {
       await registerUser({ email, password, name }).unwrap();
-      // reset();
-    } catch (error) {
-      Alert.alert('Error', 'Registration failed. Please try again.');
+      reset();
+    } catch (error: any) {
+      console.log(error);
+      Alert.alert(
+        'Error',
+        error.message || 'Registration failed. Please try again.'
+      );
     }
   }, [navigation, register, form]);
 

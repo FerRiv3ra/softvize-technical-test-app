@@ -76,9 +76,11 @@ export const UserRegisterThunk = createAsyncThunk(
 
       logAppEvent('UserRegisterSuccess', userData.email);
       return response;
-    } catch (error) {
+    } catch (error: any) {
       logAppError('UserRegisterError', error);
-      return rejectWithValue('registration.failed');
+      return rejectWithValue(
+        error.response?.data?.message ?? 'registration.failed'
+      );
     }
   }
 );
