@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from 'react';
 import {
   Pressable,
   StyleProp,
@@ -9,12 +9,13 @@ import {
   TextStyle,
   View,
   ViewStyle,
-} from "react-native";
+} from 'react-native';
 
-import Ionicons from "@expo/vector-icons/Ionicons";
+import Ionicons from '@expo/vector-icons/Ionicons';
 
-import { useThemeColor } from "@/src/hooks/useThemeColor";
-import { scale } from "@/src/utils/helpers/scale";
+import { useThemeColor } from '@/src/hooks/useThemeColor';
+import { IconName } from '@/src/types/icons.types';
+import { scale } from '@/src/utils/helpers/scale';
 
 /**
  * CustomInput is a reusable input component with a label.
@@ -38,6 +39,7 @@ import { scale } from "@/src/utils/helpers/scale";
  */
 interface CustomInputProps extends TextInputProps {
   label: string;
+  icon?: IconName;
   password?: boolean;
   containerStyle?: StyleProp<ViewStyle>;
   labelStyle?: StyleProp<TextStyle>;
@@ -47,6 +49,7 @@ export const CustomInput = ({
   label,
   containerStyle,
   labelStyle,
+  icon,
   password = false,
   style,
   placeholder,
@@ -65,26 +68,48 @@ export const CustomInput = ({
 
   const memoStyles = useMemo(() => {
     return StyleSheet.create({
+      labelContainer: {
+        position: 'absolute',
+        top: scale(-8),
+        left: scale(8),
+        backgroundColor: colors.background,
+        zIndex: 1,
+        paddingHorizontal: scale(4),
+      },
       label: {
-        fontSize: scale(15, "font"),
-        fontWeight: "bold",
+        fontSize: scale(12, 'font'),
+        color: colors.text,
+        fontWeight: 'bold',
+        fontFamily: 'Mulish-SemiBold',
       },
       input: {
         height: scale(40),
         borderColor: colors.tint,
         borderWidth: 1,
         borderRadius: scale(8),
-        paddingHorizontal: scale(12),
-        width: "100%",
+        paddingHorizontal: scale(icon ? 40 : 12),
+        fontFamily: 'Mulish-Regular',
+        width: '100%',
       },
-      icon: { position: "absolute", right: scale(12) },
+      icon: { position: 'absolute', right: scale(12) },
+      leftIconContainer: {
+        position: 'absolute',
+        left: scale(12),
+        top: scale(10),
+        zIndex: 1,
+      },
     });
-  }, [colors]);
+  }, [colors, icon]);
 
   return (
     <View style={containerStyle}>
-      <Text style={[memoStyles.label, labelStyle]}>{label}</Text>
-      <View style={{ position: "relative", justifyContent: "center" }}>
+      <View style={memoStyles.leftIconContainer}>
+        <Ionicons name={icon} size={scale(20)} color={colors.text} />
+      </View>
+      <View style={memoStyles.labelContainer}>
+        <Text style={[memoStyles.label, labelStyle]}>{label}</Text>
+      </View>
+      <View style={{ position: 'relative', justifyContent: 'center' }}>
         <TextInput
           style={[memoStyles.input, style]}
           placeholderTextColor={colors.placeholder}
@@ -95,7 +120,7 @@ export const CustomInput = ({
         {password && (
           <Pressable style={memoStyles.icon} onPress={handlePress}>
             <Ionicons
-              name={passwordVisible ? "eye-off" : "eye"}
+              name={passwordVisible ? 'eye-off-outline' : 'eye-outline'}
               size={scale(20)}
             />
           </Pressable>

@@ -10,7 +10,6 @@ import { AppLogo } from '@/src/utils/constants/Images';
 
 export const RegisterScreen = () => {
   const {
-    colors,
     email,
     handleNavigate,
     handleSubmit,
@@ -23,22 +22,28 @@ export const RegisterScreen = () => {
   return (
     <View style={styles.container}>
       <Image source={AppLogo} style={styles.logo} />
-      <Text style={styles.welcomeText}>Please register to continue.</Text>
+      <View>
+        <Text style={styles.welcomeText}>Welcome</Text>
+        <Text style={styles.welcomeMessage}>Please register to continue.</Text>
+      </View>
 
       <CustomInput
         label="Email"
+        icon="mail-outline"
         value={email}
         onChangeText={value => onChange(value, 'email')}
         placeholder="Enter your email"
       />
       <CustomInput
         label="Name"
+        icon="person-outline"
         value={name}
         onChangeText={value => onChange(value, 'name')}
         placeholder="Enter your name"
       />
       <CustomInput
         label="Password"
+        icon="lock-closed-outline"
         value={password}
         onChangeText={value => onChange(value, 'password')}
         placeholder="Enter your password"
@@ -49,10 +54,10 @@ export const RegisterScreen = () => {
       <CustomButton onPress={handleSubmit}>Log In</CustomButton>
 
       <View style={styles.signUpContainer}>
-        <Text>Already have an account? </Text>
+        <Text style={styles.accountText}>Already have an account? </Text>
         <CustomButton
           onPress={handleNavigate}
-          textStyle={{ color: colors.tint }}
+          textStyle={styles.signUpLoginText}
           unstyled>
           Log In
         </CustomButton>

@@ -9,29 +9,27 @@ import { useAuthScreens } from '@/src/hooks/useAuthScreens';
 import { AppLogo } from '@/src/utils/constants/Images';
 
 export const LoginScreen = () => {
-  const {
-    colors,
-    email,
-    handleNavigate,
-    handleSubmit,
-    onChange,
-    password,
-    styles,
-  } = useAuthScreens();
+  const { email, handleNavigate, handleSubmit, onChange, password, styles } =
+    useAuthScreens();
 
   return (
     <View style={styles.container}>
       <Image source={AppLogo} style={styles.logo} />
-      <Text style={styles.welcomeText}>Please log in to continue.</Text>
+      <View>
+        <Text style={styles.welcomeText}>Welcome back</Text>
+        <Text style={styles.welcomeMessage}>Please log in to continue.</Text>
+      </View>
 
       <CustomInput
         label="Email"
+        icon="mail-outline"
         value={email}
         onChangeText={value => onChange(value, 'email')}
         placeholder="Enter your email"
       />
       <CustomInput
         label="Password"
+        icon="lock-closed-outline"
         value={password}
         onChangeText={value => onChange(value, 'password')}
         placeholder="Enter your password"
@@ -42,10 +40,10 @@ export const LoginScreen = () => {
       <CustomButton onPress={handleSubmit}>Log In</CustomButton>
 
       <View style={styles.signUpContainer}>
-        <Text>Don't have an account? </Text>
+        <Text style={styles.accountText}>Don't have an account? </Text>
         <CustomButton
           onPress={handleNavigate}
-          textStyle={{ color: colors.tint }}
+          textStyle={styles.signUpLoginText}
           unstyled>
           Sign Up
         </CustomButton>

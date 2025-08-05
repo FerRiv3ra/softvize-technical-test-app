@@ -84,13 +84,30 @@ export const useAuthScreens = (register = false) => {
       },
       welcomeText: {
         textAlign: 'center',
+        fontSize: scale(20, 'font'),
+        lineHeight: scale(36, 'height'),
+        fontFamily: 'InknutAntiqua-Bold',
+      },
+      welcomeMessage: {
+        textAlign: 'center',
         fontSize: scale(16, 'font'),
+        lineHeight: scale(16, 'height'),
+        fontFamily: 'Mulish-SemiBold',
+        color: colors.text,
       },
       signUpContainer: {
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
         gap: scale(2),
+      },
+      accountText: {
+        fontFamily: 'Mulish-Regular',
+        color: colors.text,
+      },
+      signUpLoginText: {
+        fontFamily: 'Mulish-SemiBold',
+        color: colors.tint,
       },
     });
   }, [top]);
